@@ -2281,7 +2281,6 @@ the specific language governing permissions and limitations under the Apache Lic
             var selected = 0, selectedElm = null, self = this, showSearchInput = true;
 
             // find the selected element in the result list
-
             this.findHighlightableChoices().each2(function (i, elm) {
                 if (equal(self.id(elm.data("select2-data")), self.opts.element.val())) {
                     selected = i;
@@ -2295,12 +2294,11 @@ the specific language governing permissions and limitations under the Apache Lic
                 if (initial === true && selected >= 0) {
                     // By default, the selected item is displayed inside the result list from a single select
                     // User can provide an implementation for 'hideSelectionFromResult' and hide it
-                    if(selectedElm !== null) {
-                        if(this.opts.hideSelectionFromResult(selectedElm))
-                            selectedElm.addClass("select2-selected");
-                    }
-                    else
+                    if (selectedElm !== null && this.opts.hideSelectionFromResult(selectedElm)) {
+                        selectedElm.addClass("select2-selected");
+                    } else {
                         this.highlight(selected);
+                    }
                 } else {
                     this.highlight(0);
                 }
@@ -3032,7 +3030,7 @@ the specific language governing permissions and limitations under the Apache Lic
                     // By default, the selected item is hidden from the result list inside a multi select
                     // User can provide an implementation for 'hideSelectionFromResult' and allow the same
                     // element to be selected multiple times.
-                    if(self.opts.hideSelectionFromResult(choice) === undefined || self.opts.hideSelectionFromResult(choice)) {
+                    if (self.opts.hideSelectionFromResult(choice) === undefined || self.opts.hideSelectionFromResult(choice)) {
                         choice.addClass("select2-selected");
                         // mark all children of the selected parent as selected
                         choice.find(".select2-result-selectable").addClass("select2-selected");
